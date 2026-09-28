@@ -3,41 +3,43 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const tasks = [
-  // Home Maintenance
-  { category: "Home Maintenance", name: "Plumbing repairs", description: "Fix leaks, taps, blocked drains and water heaters." },
-  { category: "Home Maintenance", name: "Electrical repairs", description: "Switches, fans, lights and wiring issues sorted by a verified electrician." },
-  { category: "Home Maintenance", name: "Carpentry work", description: "Repair furniture, doors, cabinets and fittings." },
-  { category: "Home Maintenance", name: "AC servicing", description: "Routine AC cleaning, gas refills and repairs." },
+  // Errands & Daily Tasks
+  { category: "Errands & Daily Tasks", name: "Pickups & Deliveries", description: "Parcels, documents and items collected or dropped off." },
+  { category: "Errands & Daily Tasks", name: "Payments & Renewals", description: "Bills, subscriptions and renewals paid on time." },
+  { category: "Errands & Daily Tasks", name: "Documents & Government", description: "Certificates, registrations and government office work." },
+  { category: "Errands & Daily Tasks", name: "Shopping", description: "Groceries and household shopping done for you." },
 
-  // Cleaning & Housekeeping
-  { category: "Cleaning & Housekeeping", name: "Deep home cleaning", description: "Top-to-bottom cleaning of every room, kitchen and bathroom." },
-  { category: "Cleaning & Housekeeping", name: "Sofa & carpet cleaning", description: "Shampoo and vacuum sofas, carpets and mattresses." },
-  { category: "Cleaning & Housekeeping", name: "Pest control", description: "Treatment for cockroaches, termites, mosquitoes and more." },
-  { category: "Cleaning & Housekeeping", name: "Find domestic help", description: "Hire and verify a maid, cook or housekeeper." },
+  // Home Services
+  { category: "Home Services", name: "AC service & repair", description: "Cleaning, gas refills and repairs for your ACs." },
+  { category: "Home Services", name: "Plumbing", description: "Leaks, taps, drains and water heaters fixed." },
+  { category: "Home Services", name: "Electrical", description: "Switches, fans, lights and wiring issues sorted." },
+  { category: "Home Services", name: "Deep cleaning", description: "Top-to-bottom cleaning of your home." },
+  { category: "Home Services", name: "Repairs & carpentry", description: "Furniture, doors and fittings repaired." },
 
-  // Errands & Deliveries
-  { category: "Errands & Deliveries", name: "Grocery shopping", description: "Weekly groceries bought and delivered to your door." },
-  { category: "Errands & Deliveries", name: "Medicine pickup", description: "Collect prescriptions from the pharmacy." },
-  { category: "Errands & Deliveries", name: "Courier & parcels", description: "Send, receive and track parcels and documents." },
-  { category: "Errands & Deliveries", name: "Laundry & dry cleaning", description: "Pickup, wash, iron and drop-off of clothes." },
+  // Travel & Tourism
+  { category: "Travel & Tourism", name: "Flights", description: "Search, book and manage flight tickets." },
+  { category: "Travel & Tourism", name: "Hotels", description: "Stays that fit your budget and plans." },
+  { category: "Travel & Tourism", name: "Visas", description: "Visa paperwork and appointments handled." },
+  { category: "Travel & Tourism", name: "Airport transfers", description: "Cabs to and from the airport, booked ahead." },
+  { category: "Travel & Tourism", name: "Itinerary planning", description: "Day-by-day trip plans made for your family." },
 
-  // Bills & Payments
-  { category: "Bills & Payments", name: "Utility bill payments", description: "Electricity, water and gas bills paid on time." },
-  { category: "Bills & Payments", name: "Mobile & internet recharge", description: "Keep phone, broadband and DTH plans active." },
-  { category: "Bills & Payments", name: "Property tax filing", description: "Calculate and pay municipal property tax." },
-  { category: "Bills & Payments", name: "Insurance renewals", description: "Track and renew health, vehicle and home insurance." },
+  // Health & Medical
+  { category: "Health & Medical", name: "Doctor appointments", description: "Consultations booked and reminded." },
+  { category: "Health & Medical", name: "Lab tests at home", description: "Home sample collection scheduled." },
+  { category: "Health & Medical", name: "Medicine delivery", description: "Prescriptions picked up and delivered." },
+  { category: "Health & Medical", name: "Hospital support", description: "Admissions, discharge and insurance paperwork." },
 
-  // Health & Wellness
-  { category: "Health & Wellness", name: "Doctor appointments", description: "Book and remind you about consultations." },
-  { category: "Health & Wellness", name: "Lab tests at home", description: "Schedule home sample collection for blood tests." },
-  { category: "Health & Wellness", name: "Elderly care support", description: "Regular check-ins and help for elderly family members." },
-  { category: "Health & Wellness", name: "Fitness trainer", description: "Find a personal trainer or yoga instructor." },
+  // Senior Care
+  { category: "Senior Care", name: "Regular check-ins", description: "Someone checks on your parents regularly." },
+  { category: "Senior Care", name: "Caregiver arrangement", description: "Find and verify a trained caregiver." },
+  { category: "Senior Care", name: "Doctor visit escort", description: "Accompanied trips to doctors and hospitals." },
+  { category: "Senior Care", name: "Emergency support", description: "Quick help when something goes wrong." },
 
-  // Travel & Bookings
-  { category: "Travel & Bookings", name: "Train & flight tickets", description: "Search, book and manage travel tickets." },
-  { category: "Travel & Bookings", name: "Hotel bookings", description: "Find and reserve stays that fit your budget." },
-  { category: "Travel & Bookings", name: "Cab arrangements", description: "Airport drops and outstation cabs booked in advance." },
-  { category: "Travel & Bookings", name: "Passport & visa help", description: "Paperwork and appointments for passports and visas." },
+  // Events & Management
+  { category: "Events & Management", name: "Birthday parties", description: "Venue, cake, decor and guests sorted." },
+  { category: "Events & Management", name: "Poojas & functions", description: "Priest, samagri and arrangements handled." },
+  { category: "Events & Management", name: "Catering", description: "Food for gatherings of any size." },
+  { category: "Events & Management", name: "Decor & venue", description: "Decoration and venue booking." },
 ];
 
 async function main() {
