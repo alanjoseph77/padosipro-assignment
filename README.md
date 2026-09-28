@@ -20,10 +20,30 @@ See [DESIGN.md](DESIGN.md) for the architecture and trade-offs.
 
 ## Quick start with the prebuilt APK
 
-1. Start the backend: `docker compose up --build` (see [section 1](#1-run-the-backend-one-command)).
-2. Download `PadosiPro.apk` from this repository's **Releases** page (v1.0).
-3. Start an **Android emulator** and drag the APK onto it to install.
-4. Open PadosiPro and register. The verification code arrives in Mailpit at http://localhost:8025.
+1. **Start the backend** from the repository root (see [section 1](#1-run-the-backend-one-command)):
+   ```bash
+   docker compose up --build
+   ```
+   Check that http://localhost:4000/health returns `{"status":"ok"}`.
+2. **Download the APK:** get `PadosiPro.apk` from this repository's **Releases** page (v1.0).
+3. **Start an Android emulator:** in Android Studio, open **Device Manager** and press ▶ next to a virtual device. If it shows *"Missing system image"*, click the download icon on that row first.
+4. **Install the APK by drag and drop:** drag `PadosiPro.apk` from your file explorer onto the emulator window. Wait for the *"Installing APK"* message to finish.
+
+   If dragging doesn't work, install it from a terminal instead (`adb` is in the Android SDK's `platform-tools` folder):
+   ```bash
+   adb install PadosiPro.apk
+   ```
+5. **Open the app:** swipe up on the emulator's home screen to open the app drawer, then tap **PadosiPro**.
+6. **Walk through the flow:**
+   1. **Register** with any email, for example `test1@test.com` / `Test1234`.
+   2. **Verify:** copy the 6-digit code from Mailpit at http://localhost:8025.
+   3. **Log in, then Profile:** use test data only, for example `Test User`, `9876543210`, `12 MG Road, Bengaluru 560001`.
+   4. **Pick tasks,** confirm them, and you land on **Home**.
+   5. **Log out:** tap the avatar at the top right, then **Log out** on the Account screen.
+
+**Reinstalling a newer APK:** long-press the PadosiPro icon, choose **App info → Uninstall**, then drag the new APK in again. Or run `adb install -r PadosiPro.apk` to replace it and keep the app's data.
+
+**"Can't reach the server" in the app:** make sure `docker compose up` is still running and that http://localhost:4000/health works on your computer.
 
 The APK is built for the emulator: it calls `http://10.0.2.2:4000`, which is the emulator's address for your computer. To use a real phone instead, rebuild the APK with your computer's LAN IP (see [section 3](#3-build-the-apk)), or run the app with Expo Go (see [section 2](#2-run-the-mobile-app)).
 
