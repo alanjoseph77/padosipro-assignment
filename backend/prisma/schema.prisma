@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String     @id @default(uuid())
+  email            String     @unique
+  passwordHash     String
+  isVerified       Boolean    @default(false)
+  profileCompleted Boolean    @default(false)
+  createdAt        DateTime   @default(now())
+  profile          Profile?
+  otps             EmailOtp[]
+  tasks            UserTask[]
+}
+
+model Profile {
+  userId       String  @id
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name         String
+  mobile       String
+  address      String
+  businessName String?
+}
+
+model EmailOtp {
+  id         String    @id @default(uuid())
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  codeHash   String
+  expiresAt  DateTime
+  attempts   Int       @default(0)
+  consumedAt DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model Task {
+  id          Int        @id @default(autoincrement())
+  name        String
+  category    String
+  description String
+  users       UserTask[]
+}
+
+model UserTask {
+  userId String
+  taskId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@id([userId, taskId])
+}
