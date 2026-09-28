@@ -19,13 +19,46 @@ Content-Type: application/json
 { "email": "alan@test.com" }
 
 ### Login
+# @name login
 POST {{base}}/auth/login
 Content-Type: application/json
 
 { "email": "alan@test.com", "password": "Test1234" }
+
+###
+@token = {{login.response.body.token}}
 
 ### Validation error example
 POST {{base}}/auth/register
 Content-Type: application/json
 
 { "email": "not-an-email", "password": "abc" }
+
+### Who am I
+GET {{base}}/me
+Authorization: Bearer {{token}}
+
+### Save profile
+PUT {{base}}/me/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "name": "Alan Test", "mobile": "+91 98765 43210", "address": "12 MG Road, Mangaluru, Karnataka 575001", "businessName": "" }
+
+### Task catalogue
+GET {{base}}/tasks
+Authorization: Bearer {{token}}
+
+### Save selected tasks
+PUT {{base}}/me/tasks
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "taskIds": [1, 5, 9] }
+
+### My selected tasks
+GET {{base}}/me/tasks
+Authorization: Bearer {{token}}
+
+### No token (should be 401)
+GET {{base}}/me
