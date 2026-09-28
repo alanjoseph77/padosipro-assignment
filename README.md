@@ -18,6 +18,15 @@ A native mobile app and its backend for PadosiPro's first customer journey. A ne
 
 See [DESIGN.md](DESIGN.md) for the architecture and trade-offs.
 
+## Quick start with the prebuilt APK
+
+1. Start the backend: `docker compose up --build` (see [section 1](#1-run-the-backend-one-command)).
+2. Download `PadosiPro.apk` from this repository's **Releases** page (v1.0).
+3. Start an **Android emulator** and drag the APK onto it to install.
+4. Open PadosiPro and register. The verification code arrives in Mailpit at http://localhost:8025.
+
+The APK is built for the emulator: it calls `http://10.0.2.2:4000`, which is the emulator's address for your computer. To use a real phone instead, rebuild the APK with your computer's LAN IP (see [section 3](#3-build-the-apk)), or run the app with Expo Go (see [section 2](#2-run-the-mobile-app)).
+
 ---
 
 ## Prerequisites
@@ -100,7 +109,12 @@ After changing `.env`, always restart Expo with `-c`, because the value is read 
 
 ## 3. Build the APK
 
-The API address is **built into the APK**. Set `EXPO_PUBLIC_API_URL` in `mobile/.env` before building. The API is served over plain HTTP, so the app allows cleartext traffic (`expo-build-properties` in `app.json`).
+The API address is **built into the APK** and can't be changed after building. The API is served over plain HTTP, so the app allows cleartext traffic (`expo-build-properties` in `app.json`).
+
+- **EAS build:** the address comes from `EXPO_PUBLIC_API_URL` in `mobile/eas.json` (default `http://10.0.2.2:4000`, for the emulator). EAS does not read `mobile/.env`.
+- **Local build:** the address comes from `mobile/.env`.
+
+For a real phone, set the address to `http://<your-computer's-LAN-IP>:4000` before building.
 
 ### Option A: EAS cloud build (recommended, no Android SDK needed)
 

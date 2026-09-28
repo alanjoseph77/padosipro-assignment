@@ -5,6 +5,7 @@ export function Logo() {
   return (
     <View style={styles.logo}>
       <View style={styles.mark} />
+      <View style={styles.dot} />
     </View>
   );
 }
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
     width: 26, height: 26, borderWidth: 6, borderColor: colors.brandAccent,
     borderRadius: 4, transform: [{ rotate: "45deg" }],
   },
+  dot: { position: "absolute", width: 8, height: 8, borderRadius: 4, backgroundColor: colors.gold },
   brand: { marginTop: 14, fontSize: 13, fontWeight: "700", letterSpacing: 1.5, color: colors.label },
   title: { marginTop: 14, fontSize: 34, fontWeight: "700", color: colors.text },
   subtitle: { marginTop: 12, fontSize: 16, lineHeight: 24, color: colors.muted },
