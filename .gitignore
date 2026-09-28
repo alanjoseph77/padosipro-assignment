@@ -5,6 +5,8 @@ node_modules/
 .env
 .env.*
 !.env.example
+# Test settings hold only dummy values and are needed to run `npm test`
+!backend/.env.test
 
 # Build output
 dist/
