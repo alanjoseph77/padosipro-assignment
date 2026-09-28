@@ -9,12 +9,32 @@ services:
       - "5434:5432"
     volumes:
       - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d padosipro"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
 
   mailpit:
     image: axllent/mailpit
     ports:
       - "8025:8025"
       - "1025:1025"
+
+  api:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: postgresql://app:app@db:5432/padosipro
+      SMTP_HOST: mailpit
+      SMTP_PORT: "1025"
+    ports:
+      - "4000:4000"
+    depends_on:
+      db:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
 
 volumes:
   dbdata:
