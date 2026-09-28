@@ -1,0 +1,31 @@
+@base = http://localhost:4000
+
+### Register
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{ "email": "alan@test1.com", "password": "Test1234" }
+
+### Verify (put the code from Mailpit here)
+POST {{base}}/auth/verify-otp
+Content-Type: application/json
+
+{ "email": "alan@test1.com", "code": "368194" }
+
+### Resend code
+POST {{base}}/auth/resend-otp
+Content-Type: application/json
+
+{ "email": "alan@test.com" }
+
+### Login
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{ "email": "alan@test.com", "password": "Test1234" }
+
+### Validation error example
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{ "email": "not-an-email", "password": "abc" }
